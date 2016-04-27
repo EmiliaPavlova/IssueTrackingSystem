@@ -8,7 +8,7 @@
             'BASE_URL',
             function($http, $q, BASE_URL) {
 
-                var deffered = $q.defer();
+                var deferred = $q.defer();
 
                 var currentUser;
 
@@ -27,9 +27,13 @@
                     requestUserProfile: function() {
                         var userProfileDeferred = $q.defer();
 
-                        $http.get(BASE_URL + 'me')
+                        $http.get(BASE_URL + '/users/me', {
+                            headers: {
+                                Authorization: sessionStorage['access_token']
+                            }
+                        })
                             .then(function(response) {
-                                currentUser = response;
+                                currentUser = response.data;
                                 deferred.resolve(currentUser);
                                 userProfileDeferred.resolve();
                             });

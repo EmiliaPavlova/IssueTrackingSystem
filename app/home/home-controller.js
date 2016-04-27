@@ -19,9 +19,10 @@
           $scope.isLogged = authentication.isAuthenticated();
           $scope.register = function(registeredUser) {
             authentication.registerUser(registeredUser)
-                .then(function(registeredUser) {
-                  $location.path('/');
-                  $route.reload();
+                .then(function(response) {
+                  $scope.login({
+                      username: registeredUser.email,
+                      password: registeredUser.password });
                 });
           };
 
@@ -29,15 +30,15 @@
             authentication.loginUser(user)
                 .then(function(loggedInUser) {
                   console.log(loggedInUser);
+                    $scope.isLogged = true;
                   $location.path('/');
-                  $route.reload();
                 });
           };
 
           $scope.logout = function() {
             authentication.logout();
+              $scope.isLogged = false;
             $location.path('/');
-            $route.reload();
           };
 
         }]);

@@ -13,19 +13,16 @@
         .controller('UsersController', [
             '$scope',
             '$http',
-            'authentication',
-            function($scope, $http, authentication) {
+            'identity',
+            function($scope, $http, identity) {
 
-                authentication.getCurrentUser()
+                identity.getCurrentUser()
                     .then(function(user) {
-                        $scope.currentUser = [
-                            currentUser.id = currentUser.id,
-                            currentUser.username = currentUser.username,
-                            currentUser.isAdmin = currentUser.isAdmin
-                        ];
+                        $scope.currentUser = {
+                            id: user.id,
+                            username: user.username,
+                            isAdmin: user.isAdmin
+                        };
                     });
-
-                $scope.isAuthenticated = authentication.isAuthenticated();
-
-            }]);
+           }]);
 }());

@@ -21,19 +21,14 @@
 
                     $http.post(BASE_URL + '/api/Account/Register', registerUser)
                         .then(function(response){
-                            preserveUserData(response.data);
-
-                            identity.requestUserProfile()
-                                .then(function() {
-                                    deferred.resolve(response.data);
-                                });
+                            deferred.resolve(response.data);
                     });
 
                     return deferred.promise;
                 }
 
                 function authorizationHeader() {
-                    return {Authorization: sessionStorage['access_token']};
+                    return { headers: {Authorization: sessionStorage['access_token']}};
                 }
 
                 function loginUser(user) {
@@ -50,6 +45,7 @@
                     }).then(function(response) {
                         //console.log(response);
                         sessionStorage['access_token'] = 'Bearer ' + response.data.access_token;
+                        identity.requestUserProfile();
                         deferred.resolve(response);
                     }, function(error) {
                         deferred.reject(error);
@@ -101,23 +97,13 @@
                 function logout() {
                     $window.sessionStorage.clear();
                     identity.removeUserProfile();
-                    $location.path('/');
-                    //var deferred = $q.defer();
-
-                    //var headers = authorization.getAuthorizationHeader();
-                    //$http.post(baseServiceUrl + '/api/Account/Logout', {}, { headers: headers })
-                    //    .then(function () {
-                    //        identity.setCurrentUser(undefined);
-                    //        deferred.resolve();
-                    //    });
-                    //
-                    //return deferred.promise;
                 }
 
                 return {
                     registerUser: registerUser,
                     loginUser: loginUser,
                     isAuthenticated: isAuthenticated,
+                    authorizationHeader: authorizationHeader,
                     //showProfile: showProfile,
                     //changePassword: changePassword,
                     logout: logout
