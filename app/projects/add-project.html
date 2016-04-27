@@ -1,0 +1,59 @@
+<form name="addProjectForm" class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-11">
+            <h3>Add Project</h3>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="control-label col-md-2">Name</label>
+        <div class="col-md-9">
+            <input type="text" id="title" class="form-control" ng-model="projectData.Name" placeholder="Name" required="required">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="projectKey" class="control-label col-md-2">Project Key</label>
+        <div class="col-md-9">
+            <input type="text" id="projectKey" class="form-control" ng-model="projectData.ProjectKey" required="required" placeholder="Project Key">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description" class="control-label col-md-2">Description</label>
+        <div class="col-md-9">
+            <textarea id="description" ng-model="projectData.Description" class="col-md-8 form-control" required="required" placeholder="Description"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="leader" class="control-label col-md-2">Leader</label>
+        <div class="col-md-9">
+            <select id="leader" ng-model="projectData.LeadId"
+                    required="required" class="form-control">
+                <option value="" disabled>-- Select Assignee --</option>
+                <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="labels" class="control-label col-md-2">Labels</label>
+        <div class="col-md-9">
+            <tags-input id="labels" ng-model="projectData.Labels" display-property="Name" placeholder="Labels"
+                        replace-spaces-with-dashes="false" required="required">
+                <auto-complete source="loadLabels($query)" min-length="0"></auto-complete>
+            </tags-input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="priorities" class="control-label col-md-2">Priorities</label>
+        <div class="col-md-9">
+            <input type="text" id="priorities" class="form-control" ng-model="projectData.Priorities" to-array-object-parser
+                   required="required" placeholder="Priorities">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn btn-success" ng-click="addProject(projectData, projectLabels)" ng-disabled="addProjectForm.$invalid" data-dismiss="modal">
+                Add Project
+            </button>
+            <a href="#/" class="btn btn-default" data-dismiss="modal">Cancel</a>
+        </div>
+    </div>
+</form>

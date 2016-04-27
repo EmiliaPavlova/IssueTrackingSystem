@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="issueTracker">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Issue Tracking System</title>
+  <meta name="description" content="Issue Tracking System">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="script" href="app/bower_components/bootstrap/dist/js/bootstrap.js">
+  <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="app/app.css" />
+  <script src="app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body ng-cloak>
+  <main class="container" ng-view></main>
+
+  <footer>Issue Tracking System by Emilu</footer>
+
+  <script src="app/bower_components/jquery/dist/jquery.js"></script>
+  <script src="app/bower_components/angular/angular.js"></script>
+  <script src="app/bower_components/angular-route/angular-route.js"></script>
+  <script src="app/app.js"></script>
+
+  <script src="app/common/main-controller.js"></script>
+
+  <script src="app/home/home-controller.js"></script>
+
+  <script src="app/users/authentication.js"></script>
+  <script src="app/users/identity.js"></script>
+  <!--<script src="app/dashboard/dashboard.js"></script>-->
+  <!--<script src="app/projects/projects.js"></script>-->
+</body>
+</html>
