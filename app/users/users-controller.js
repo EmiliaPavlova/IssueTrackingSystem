@@ -16,13 +16,6 @@
             'identity',
             function($scope, $http, identity) {
 
-                identity.getCurrentUser()
-                    .then(function(user) {
-                        $scope.currentUser = {
-                            id: user.id,
-                            username: user.username,
-                            isAdmin: user.isAdmin
-                        };
-                    });
+                $scope.currentUser = identity.getCurrentUser();
            }]);
 }());

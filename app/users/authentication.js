@@ -11,10 +11,10 @@
             'BASE_URL',
             function($http, $q, $window, $location, identity, BASE_URL) {
 
-                function preserveUserData(data) {
-                    var accessToken = data.access_token;
-                    sessionStorage['access_token'] = 'Bearer ' + response.data.access_token;
-                }
+                //function preserveUserData(data) {
+                //    var accessToken = data.access_token;
+                //    sessionStorage['access_token'] = 'Bearer ' + response.data.access_token;
+                //}
 
                 function registerUser(registerUser) {
                     var deferred = $q.defer();
@@ -45,7 +45,9 @@
                     }).then(function(response) {
                         //console.log(response);
                         sessionStorage['access_token'] = 'Bearer ' + response.data.access_token;
-                        identity.requestUserProfile();
+
+                        identity.requestUserProfile()
+                            .then(function(){});
                         deferred.resolve(response);
                     }, function(error) {
                         deferred.reject(error);

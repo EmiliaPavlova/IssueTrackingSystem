@@ -13,7 +13,24 @@
   <link rel="stylesheet" href="app/app.css" />
   <script src="app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body ng-cloak>
+<body ng-cloak ng-controller="MainController">
+    <h1>Issue Tracking System</h1>
+    <nav class="navbar navbar-inverse" ng-if="isAuthenticated()">
+    <div class="container-fluid">
+      <div  class="navbar-collapse collapse in" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a class="navbar-brand hidden" href="#/project">Go Back To Project</a></li>
+          <li><a class="navbar-brand" href="#/dashboard">Dashboard</a></li>
+          <li><a class="navbar-brand" href="#/projects">Projects</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#/Users/me">Profile</a></li>
+          <li><a href="#/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    </nav>
+
   <main class="container" ng-view></main>
 
   <footer>Issue Tracking System by Emilu</footer>
@@ -30,7 +47,7 @@
   <script src="app/users/authentication.js"></script>
   <script src="app/users/identity.js"></script>
   <script src="app/users/users-controller.js"></script>
-  <!--<script src="app/dashboard/dashboard.js"></script>-->
+  <script src="app/users/logout-controller.js"></script>
   <!--<script src="app/projects/projects.js"></script>-->
 </body>
 </html>

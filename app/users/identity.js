@@ -14,12 +14,7 @@
 
                 return {
                     getCurrentUser: function() {
-                        if (currentUser) {
-                            return $q.when(currentUser);
-                        }
-                        else {
-                            return deferred.promise;
-                        }
+                        return JSON.parse(sessionStorage['user']);
                     },
                     removeUserProfile: function() {
                         currentUser = undefined;
@@ -33,8 +28,7 @@
                             }
                         })
                             .then(function(response) {
-                                currentUser = response.data;
-                                deferred.resolve(currentUser);
+                                sessionStorage['user'] = JSON.stringify(response.data);
                                 userProfileDeferred.resolve();
                             });
 
