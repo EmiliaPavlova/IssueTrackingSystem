@@ -7,7 +7,8 @@
         'issueTracker.home',
         'issueTracker.users',
         'issueTracker.users.identity',
-        'issueTracker.users.logout'
+        'issueTracker.users.logout',
+        'issueTracker.users.changePassword'
       ])
       .config(['$routeProvider', function($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/'});

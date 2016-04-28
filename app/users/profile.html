@@ -1,3 +1,25 @@
-<!--<p>{{ currentUser.id }}</p>-->
-<p>{{ currentUser.Username }}</p>
-<p>{{ currentUser.isAdmin }}</p>
+<section class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Id</h3>
+    </div>
+    <div class="panel-body">
+        <p>{{ currentUser.Id }}</p>
+    </div>
+    <div class="panel-heading">
+        <h3 class="panel-title">Username</h3>
+    </div>
+    <div class="panel-body">
+        <p>{{ currentUser.Username }}</p>
+    </div>
+    <div class="panel-heading">
+        <h3 class="panel-title">Admin</h3>
+    </div>
+    <div class="panel-body">
+        <p>{{ currentUser.isAdmin }}</p>
+        <!--<p ng-if="isAdmin">User</p>-->
+        <!--<p ng-if="!isAdmin">Admin</p>-->
+    </div>
+
+    <a href="#/Account/ChangePassword" class="btn btn-primary btn-block left-align" ng-click="open()">Change password</a>
+
+</section>

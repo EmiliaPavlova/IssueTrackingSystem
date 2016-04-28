@@ -17,5 +17,5 @@
             function($scope, $http, identity) {
 
                 $scope.currentUser = identity.getCurrentUser();
-           }]);
+           }])
 }());
