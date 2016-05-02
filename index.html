@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/png" href="app/images/favicon.png" />
   <link rel="script" href="app/bower_components/bootstrap/dist/js/bootstrap.js">
+  <link rel="stylesheet" href="app/bower_components/angular-ui-notification/dist/angular-ui-notification.min.css" />
   <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -39,17 +40,24 @@
   <script src="app/bower_components/jquery/dist/jquery.js"></script>
   <script src="app/bower_components/angular/angular.js"></script>
   <script src="app/bower_components/angular-route/angular-route.js"></script>
+  <script src="app/bower_components/angular-ui-notification/dist/angular-ui-notification.js"></script>
+  <script src="app/bower_components/angular-ui-bootstrap-pagination/pagination.js"></script>
+
   <script src="app/app.js"></script>
 
   <script src="app/common/main-controller.js"></script>
 
   <script src="app/home/home-controller.js"></script>
 
-  <script src="app/users/authentication.js"></script>
-  <script src="app/users/identity.js"></script>
+  <script src="app/issues/issues-service.js"></script>
+
+  <!--<script src="app/projects/projects-controller.js"></script>-->
+  <!--<script src="app/projects/projects-service.js"></script>-->
+
+  <script src="app/users/authentication-service.js"></script>
+  <script src="app/users/identity-service.js"></script>
   <script src="app/users/users-controller.js"></script>
   <script src="app/users/logout-controller.js"></script>
   <script src="app/users/change-password-controller.js"></script>
-  <!--<script src="app/projects/projects.js"></script>-->
 </body>
 </html>

@@ -11,18 +11,13 @@
             'BASE_URL',
             function($http, $q, $window, $location, identity, BASE_URL) {
 
-                //function preserveUserData(data) {
-                //    var accessToken = data.access_token;
-                //    sessionStorage['access_token'] = 'Bearer ' + response.data.access_token;
-                //}
-
                 function registerUser(registerUser) {
                     var deferred = $q.defer();
 
                     $http.post(BASE_URL + '/api/Account/Register', registerUser)
                         .then(function(response){
                             deferred.resolve(response.data);
-                    });
+                        });
 
                     return deferred.promise;
                 }
@@ -60,43 +55,23 @@
                     return sessionStorage['access_token'] != null;
                 }
 
-                //function showProfile(currentUser) {
-                //    var deferred = $q.defer();
-                //
-                //    var currentUser = undefined;
-                //
-                //    $http.get(BASE_URL + 'Users/me')
-                //        .then(function(response) {
-                //            currentUser = response;
-                //            deferred.resolve(currentUser);
-                //        })
-                //
-                //    return {
-                //        getCurrentUser: function () {
-                //            if (currentUser) {
-                //                return $q.when(currentUser);
-                //            }
-                //            else {
-                //                return deferred.promise;
-                //            }
-                //        },
-                //        isAuthenticated: function () {
-                //            return true;
-                //        }
-                //    };
-                //}
+                function changePassword(password) {
+                    var deferred = $q.defer();
 
-                //function changePassword(changePasswordData) {
-                //    $http.post(BASE_URL + 'api/Account/ChangePassword', changePasswordData, {headers: authorizationHeader()})
-                //        .then(function (response) {
-                //            notifyService.showInfo('Password Changed');
-                //            $location.path('/Users/me');
-                //        }, function (error) {
-                //            notifyService.showError('Password Not Changed', error);
-                //        })
-                //}
+                    $http.post(BASE_URL + 'api/Account/ChangePassword', password, {
+                            headers: {
+                                Authorization: 'Bearer ' + sessionStorage['access_token']
+                            }
+                        })
+                        .then(function (response) {
+                            deferred.resolve(response);
+                        });
+
+                    return deferred.promise;
+                }
 
                 function logout() {
+                    //delete sessionStorage['access_token'];
                     $window.sessionStorage.clear();
                     identity.removeUserProfile();
                 }
@@ -106,8 +81,7 @@
                     loginUser: loginUser,
                     isAuthenticated: isAuthenticated,
                     authorizationHeader: authorizationHeader,
-                    //showProfile: showProfile,
-                    //changePassword: changePassword,
+                    changePassword: changePassword,
                     logout: logout
                 }
             }]);

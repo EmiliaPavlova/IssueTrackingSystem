@@ -7,10 +7,15 @@
             function ($routeProvider) {
                 $routeProvider.when('/logout', {
                     resolve: {
-                        logout: ['$location', 'authentication', function($location, authentication){
-                            authentication.logout();
-                            $location.path('/');
-                        }]
+                        logout: [
+                            '$location',
+                            'authentication',
+                            'Notification',
+                            function($location, authentication, Notification){
+                                authentication.logout();
+                                Notification.success('Logout successful!');
+                                $location.path('/');
+                            }]
                     }
                 })
             }]);

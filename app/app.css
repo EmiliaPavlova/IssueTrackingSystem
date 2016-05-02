@@ -46,8 +46,16 @@
   margin-left: 20px;
 }
 
+.navbar-nav {
+  margin-left: 20px;
+}
+
 h1 {
   margin-left: 50px;
+}
+
+h3 {
+  margin-left: 40px;
 }
 
 .below-menu-links li {
@@ -62,4 +70,18 @@ footer {
 
 .left-align {
   text-align: left;
+}
+
+.ui-notification.success {
+  background: #149c82;
+}
+
+.min-hight {
+  min-height: 400px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 100%;
+  }
 }

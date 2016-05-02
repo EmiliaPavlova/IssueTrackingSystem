@@ -12,6 +12,8 @@
     "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0",
     "bootstrap": "^3.3.6",
-    "jquery": "^2.2.3"
+    "jquery": "^2.2.3",
+    "angular-ui-notification": "^0.2.0",
+    "angular-ui-bootstrap-pagination": "0.12.0"
   }
 }
