@@ -6,8 +6,10 @@
             'ui-notification',
             'ui.bootstrap.pagination',
             'issueTracker.common',
-            'issueTracker.home',
-            'issueTracker.issuesService',
+            'issueTracker.homeController',
+            'issueTracker.issues.issuesService',
+            'issueTracker.projects.projectsService',
+            'issueTracker.projects.projectsController',
             'issueTracker.users',
             'issueTracker.users.identity',
             'issueTracker.users.logout',
@@ -17,5 +19,5 @@
             $routeProvider.otherwise({redirectTo: '/'});
         }])
         .constant('BASE_URL', 'https://softuni-issue-tracker.azurewebsites.net')
-        .constant('/BASE_PAGE_SIZE', 5);
+        .constant('PAGE_SIZE', 5);
 }());

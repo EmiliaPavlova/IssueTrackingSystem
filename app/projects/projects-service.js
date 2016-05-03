@@ -4,19 +4,49 @@
     angular.module('issueTracker.projects.projectsService', [])
         .factory('projectsService', [
             '$http',
+            '$q',
             'BASE_URL',
-            'identity',
-            function getAllProject($http, BASE_URL, identity) {
+            'PAGE_SIZE',
+            'authentication',
+            function($http, $q, BASE_URL, PAGE_SIZE, authentication) {
+                function getAllUserProjects(userId, pageSize, pageNumber) {
+                    pageSize = pageSize || 15;
+                    pageNumber = pageNumber || 1;
+                    var deferred = $q.defer();
 
-                //var projectsService = {};
+                    var urlProjects = BASE_URL + '/projects?filter=Issues.Any(Assignee.Id=="' + userId + '")||LeadId=="' + userId + '"&pageSize=' + pageSize + '&pageNumber=' + pageNumber;
 
-                //$http.get(BASE_URL + 'projects/', {
-                //    headers: {
-                //        Authorization: 'Bearer ' + identity.getAccessToken()
-                //    }
-                //});
+                    $http.get(urlProjects, authentication.authorizationHeader())
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        }, function(error) {
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
+                function getAllProjects(pageSize, pageNumber) {
+                    pageSize = pageSize || 15;
+                    pageNumber = pageNumber || 1;
+                    var deferred = $q.defer();
+
+                    var urlProjects = BASE_URL + '/projects?pageSize=' + pageSize + '&pageNumber=' + pageNumber + '&filter=';
+
+                    $http.get(urlProjects, authentication.authorizationHeader())
+                        .then(function (response) {
+                            deferred.resolve(response.data);
+                        }, function(error){
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
+                return {
+                    getAllUserProjects: getAllUserProjects,
+                    getAllProjects: getAllProjects
+                }
             }
-
-
         ])
 }());

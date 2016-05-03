@@ -1,34 +1,35 @@
 (function () {
   'use strict';
 
-  angular.module('issueTracker.projects', ['issueTracker.projects.projectsService'])
+  angular.module('issueTracker.projects.projectsController', ['issueTracker.projects.projectsService'])
       .config(['$routeProvider', function($routeProvider) {
           $routeProvider.when('/projects', {
-              templateUrl: 'app/news-feed/news-feed.html',
-              controller: 'NewsFeedCtrl'
+              templateUrl: 'app/projects/projects.html',
+              controller: 'ProjectsController'
           })
       }])
 
 
       .controller('ProjectsController', [
           '$scope',
-          '$routeParams',
-          '$location',
-          'authenticationService',
-          'userService',
-          'projectService',
-          'notifyService',
-          'pageSize',
-          function($scope,$routeParams, $location, authenticationService,userService, projectService,notifyService,pageSize) {
+          'projectsService',
+          function($scope, projectsService) {
 
-              $scope.getAllProjects = function () {
-                  projectsService.getAllProjects(
-                      function success(data) {
-                          $scope.allProjects = data;
-                      },
-                      function error(error) {
-                          Notification.error('Failed loading projects', error);
+              projectsService.getAllProjects()
+                  .then(function(data) {
+                      $scope.allProjects = data.Projects;
+                      $scope.totalItems = data.TotalCount;
+                      $scope.maxSize = 20;
+                      $scope.pagination = {
+                          currentPage: 1
+                      };
+                  });
+
+              $scope.reloadProjects = function() {
+                  projectsService.getAllProjects(null, $scope.pagination.currentPage)
+                      .then(function (data) {
+                          $scope.allProjects = data.Projects;
                       });
-              }
+              };
       }]);
 }());

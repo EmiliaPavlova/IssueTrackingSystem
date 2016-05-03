@@ -80,6 +80,10 @@ footer {
   min-height: 400px;
 }
 
+.margin-left20 {
+  margin-left: 20px;
+}
+
 @media (min-width: 1200px) {
   .container {
     width: 100%;

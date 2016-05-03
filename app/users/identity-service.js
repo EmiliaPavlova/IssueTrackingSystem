@@ -14,7 +14,8 @@
 
                 return {
                     getCurrentUser: function() {
-                        return JSON.parse(sessionStorage['user']);
+                        //return JSON.parse(sessionStorage['user']);
+                        return sessionStorage['user'];
                     },
                     removeUserProfile: function() {
                         currentUser = undefined;
