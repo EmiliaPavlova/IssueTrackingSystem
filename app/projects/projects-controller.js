@@ -19,7 +19,7 @@
                   .then(function(data) {
                       $scope.allProjects = data.Projects;
                       $scope.totalItems = data.TotalCount;
-                      $scope.maxSize = 20;
+                      $scope.maxSize = 10;
                       $scope.pagination = {
                           currentPage: 1
                       };

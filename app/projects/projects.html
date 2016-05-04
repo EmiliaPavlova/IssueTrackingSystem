@@ -10,11 +10,14 @@
         <tbody>
             <tr ng-repeat="project in allProjects" ng-click="goToProject(project.Id)">
                 <td>{{project.Name}}</td>
-                <td>{{project.Description | limitTo: 20: begin}}</td>
+                <td>{{project.Description | limitTo: 50: begin}}</td>
                 <td>{{project.Lead.Username}}</td>
+                <td><a href="#" class="btn btn-primary btn-sm">View project</a>{{project.Id}}</td>
             </tr>
         </tbody>
     </table>
-    <pagination total-items="totalItems" ng-model="currentPage" ng-change="reloadProjects()" max-size="maxSize">
-    </pagination>
+    <!--<pagination total-items="totalItems" ng-model="currentPage" ng-change="reloadProjects()" max-size="maxSize">-->
+    <!--</pagination>-->
+    <uib-pagination total-items="totalItems" ng-model="pagination.currentPage" ng-change="reloadIssues()" max-size="maxSixe" boundary-links="true" template-url="app/home/pagination/pagination.html">
+    </uib-pagination>
 </div>

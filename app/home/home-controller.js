@@ -57,9 +57,12 @@
                             };
                         });
 
-                    projectsService.getAllUserProjects(identity.getCurrentUser().Id)
-                        .then(function(data) {
-                            $scope.projects = data.Projects;
+                    //var userId = JSON.parse(identity.getCurrentUser());
+                    console.log(JSON.parse(identity.getCurrentUser()).Id);
+                    projectsService.getAllUserProjects(JSON.parse(identity.getCurrentUser()).Id)
+                    //console.log(JSON.parse(identity.getCurrentUser()).Id)
+                        .then(function(projects) {
+                            $scope.projects = projects.Projects;
                         });
                 }
 

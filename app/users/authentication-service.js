@@ -58,9 +58,9 @@
                 function changePassword(password) {
                     var deferred = $q.defer();
 
-                    $http.post(BASE_URL + 'api/Account/ChangePassword', password, {
+                    $http.post(BASE_URL + '/api/Account/ChangePassword', password, {
                             headers: {
-                                Authorization: 'Bearer ' + sessionStorage['access_token']
+                                Authorization: sessionStorage['access_token']
                             }
                         })
                         .then(function (response) {

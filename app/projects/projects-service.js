@@ -10,7 +10,7 @@
             'authentication',
             function($http, $q, BASE_URL, PAGE_SIZE, authentication) {
                 function getAllUserProjects(userId, pageSize, pageNumber) {
-                    pageSize = pageSize || 15;
+                    pageSize = pageSize || 5;
                     pageNumber = pageNumber || 1;
                     var deferred = $q.defer();
 
@@ -27,7 +27,7 @@
                 }
 
                 function getAllProjects(pageSize, pageNumber) {
-                    pageSize = pageSize || 15;
+                    pageSize = pageSize || 10;
                     pageNumber = pageNumber || 1;
                     var deferred = $q.defer();
 
@@ -43,9 +43,24 @@
                     return deferred.promise;
                 }
 
+                function getProjectById(projectId) {
+                    var deferred = $q.defer();
+                    var url = BASE_URL + '/projects/' + projectId;
+
+                    $http.get(url, authentication.authorizationHeader())
+                        .then(function (response) {
+                            deferred.resolve(response.data);
+                        }, function(error){
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
                 return {
                     getAllUserProjects: getAllUserProjects,
-                    getAllProjects: getAllProjects
+                    getAllProjects: getAllProjects,
+                    getProjectById: getProjectById
                 }
             }
         ])
