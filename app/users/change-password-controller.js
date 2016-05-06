@@ -25,7 +25,7 @@
             function($scope, $location, authentication, Notification){
                 $scope.changePassword = function(changedPassword){
                     authentication.changePassword(changedPassword);
-                    Notification.success('Password changed');
+                    //Notification.success('Password changed');
                     $location.path('/Users/me');
                 }
             }

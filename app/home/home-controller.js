@@ -50,24 +50,20 @@
                     issuesService.getUserIssues()
                         .then(function(data) {
                             $scope.userIssues = data.Issues;
-                            $scope.totalItems = 20 * data.TotalPages;
-                            $scope.maxSize = 20;
-                            $scope.pagination = {
-                                currentPage: 1
-                            };
+                            $scope.totalItems = data.Issues.length * data.TotalPages;
+                            $scope.maxSize = data.Issues.length;
+                            $scope.currentPage = 1;
                         });
 
-                    //var userId = JSON.parse(identity.getCurrentUser());
-                    console.log(JSON.parse(identity.getCurrentUser()).Id);
                     projectsService.getAllUserProjects(JSON.parse(identity.getCurrentUser()).Id)
                     //console.log(JSON.parse(identity.getCurrentUser()).Id)
-                        .then(function(projects) {
-                            $scope.projects = projects.Projects;
+                        .then(function(data) {
+                            $scope.projects = data.Projects;
                         });
                 }
 
                 $scope.reloadIssues = function() {
-                    issuesService.getUserIssues(null, $scope.pagination.currentPage)
+                    issuesService.getUserIssues(null, $scope.currentPage)
                         .then(function(data) {
                             $scope.userIssues = data.Issues;
                         });

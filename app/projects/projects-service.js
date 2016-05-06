@@ -10,7 +10,7 @@
             'authentication',
             function($http, $q, BASE_URL, PAGE_SIZE, authentication) {
                 function getAllUserProjects(userId, pageSize, pageNumber) {
-                    pageSize = pageSize || 5;
+                    pageSize = pageSize || 200;
                     pageNumber = pageNumber || 1;
                     var deferred = $q.defer();
 

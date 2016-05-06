@@ -10,7 +10,7 @@
             'authentication',
             function($http, $q, BASE_URL, PAGE_SIZE, authentication) {
                 function getUserIssues(pageSize, pageNumber, orderBy) {
-                    pageSize = parseInt(pageSize || PAGE_SIZE);
+                    pageSize = parseInt(pageSize || 10);
                     pageNumber = parseInt(pageNumber || 1);
                     orderBy = orderBy || 'DueDate desc';
 

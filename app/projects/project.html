@@ -1,0 +1,36 @@
+<div class="row">
+    <div>
+        <h3>Project: {{Project.Name}}</h3>
+        <p>Name: {{project.Name}} </p>
+        <p>Project key: {{project.ProjectKey}} </p>
+        <p>Description: {{project.Description}} </p>
+        <p>Project Lead: {{project.Lead.Username}} </p>
+        <p>Labels: <span class="label label-success" ng-repeat="label in project.Labels">{{label.Name}}</span></p>
+        <p>Priorities: <span class="label label-success" ng-repeat="priority in project.Priorities">{{priority.Name}}</span></p>
+        <p ng-if="isProjectLead || isAdmin()">
+            <a href="#/projects/{{project.Id}}/edit" class="btn btn-primary">Edit</a>
+            <a href="#/projects/{{project.Id}}/add-issue" class="btn btn-primary">Add Issue</a>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h3>Issues</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Assignee</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="issue in projectIssues">
+                    <td><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
+                    <td>{{issue.Description | limitTo: 50}}</td>
+                    <td>{{issue.Assignee.Username}}</td>
+                    <td>{{issue.DueDate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
