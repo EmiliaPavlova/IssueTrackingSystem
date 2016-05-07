@@ -26,8 +26,87 @@
                     return deferred.promise;
                 }
 
+                function getProjectIssues(projectId) {
+                    var deferred = $q.defer();
+                    var url = BASE_URL + '/projects/' + projectId + '/issues';
+
+                    $http.get(url, authentication.authorizationHeader())
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        }, function(response){
+                            deferred.reject(response);
+                        });
+
+                    return deferred.promise;
+                }
+
+                function getIssueById(issueId){
+                    var deferred = $q.defer();
+
+                    var url = BASE_URL + '/Issues/' + issueId;
+
+                    $http.get(url, authentication.authorizationHeader())
+                        .then(function(response){
+                            deferred.resolve(response.data);
+                        }, function(error){
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
+                function addIssue(issue) {
+                    var deferred = $q.defer();
+
+                    var url = BASE_URL + '/issues';
+
+                    $http.post(url, issue, authentication.authorizationHeader())
+                        .then(function(response){
+                            deferred.resolve(response.data);
+                        }, function(error){
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
+                function editIssue(issueId, issue) {
+                    var deferred = $q.defer();
+
+                    var url = BASE_URL + '/issues/' + issueId;
+
+                    $http.put(url, issue, authentication.authorizationHeader())
+                        .then(function(response){
+                            deferred.resolve(response.data);
+                        }, function(error){
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
+                function updateIssueStatus(issueId, statusId) {
+                    var deferred = $q.defer();
+
+                    var url = BASE_URL + '/issues/' + issueId + '/changestatus?statusId=' + statusId;
+
+                    $http.put(url, null, authentication.authorizationHeader())
+                        .then(function(response){
+                            deferred.resolve(response.data);
+                        }, function(error){
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
                 return {
-                    getUserIssues: getUserIssues
+                    getUserIssues: getUserIssues,
+                    getProjectIssues: getProjectIssues,
+                    getIssueById: getIssueById,
+                    addIssue: addIssue,
+                    editIssue: editIssue,
+                    updateIssueStatus: updateIssueStatus
                 }
             }
         ])

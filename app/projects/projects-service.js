@@ -85,12 +85,28 @@
                     return deferred.promise;
                 }
 
+                function editProject(projectId, project) {
+                    var deferred = $q.defer();
+
+                    var url = BASE_URL + '/projects/' + projectId;
+
+                    $http.put(url, project, authentication.authorizationHeader())
+                        .then(function(response){
+                            deferred.resolve(response.data);
+                        }, function(error){
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
                 return {
                     getAllUserProjects: getAllUserProjects,
                     getAllProjects: getAllProjects,
                     getProjectById: getProjectById,
                     getProjectIssues: getProjectIssues,
-                    addProject: addProject
+                    addProject: addProject,
+                    editProject: editProject
                 }
             }
         ])

@@ -8,12 +8,15 @@
             'issueTracker.common',
             'issueTracker.homeController',
             'issueTracker.issues.issuesService',
+            'issueTracker.issues.issuesController',
             'issueTracker.projects.projectsService',
             'issueTracker.projects.projectsController',
-            'issueTracker.users',
+            'issueTracker.labels.labelsService',
+            'issueTracker.users.usersController',
             'issueTracker.users.identity',
             'issueTracker.users.logout',
-            'issueTracker.users.changePassword'
+            'issueTracker.users.changePassword',
+            'issueTracker.users.usersService'
         ])
         .config(['$routeProvider', function($routeProvider) {
             $routeProvider.otherwise({redirectTo: '/'});

@@ -1,5 +1,5 @@
 <div class="margin-left20">
-    <a href="#/projects/add" class="btn btn-primary">Add project</a>
+    <a ng-if="isAdmin()" href="#/projects/add" class="btn btn-primary">Add project</a>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -9,7 +9,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="project in allProjects" ng-click="viewProject(project.Id)">
+            <tr ng-repeat="project in allProjects">
                 <td>{{project.Name}}</td>
                 <td>{{project.Description | limitTo: 50: begin}}</td>
                 <td>{{project.Lead.Username}}</td>

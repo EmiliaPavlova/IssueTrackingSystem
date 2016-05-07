@@ -1,25 +1,24 @@
-<form name="addProjectForm" class="form-horizontal">
+<form name="addProjectForm" class="form-horizontal" >
     <div class="form-group">
         <div class="col-md-offset-1 col-md-8">
-            <h3>Add Project</h3>
+            <h3>Edit Project {{project.Name}}</h3>
         </div>
     </div>
     <div class="form-group">
         <label for="title" class="control-label col-md-2">Name</label>
         <div class="col-md-8">
-            <input type="text" id="title" class="form-control" ng-model="data.Name" placeholder="Name" required="required">
+            <input type="text" id="title" class="form-control" ng-model="data.Name" placeholder="{{project.Name}}" required="required">
         </div>
     </div>
     <div class="form-group">
         <label for="projectKey" class="control-label col-md-2">Project Key</label>
-        <div class="col-md-8">
-            <input type="text" id="projectKey" class="form-control" ng-model="data.ProjectKey" required="required" placeholder="Project Key">
+        <div class="col-md-8">{{project.ProjectKey}}
         </div>
     </div>
     <div class="form-group">
         <label for="description" class="control-label col-md-2">Description</label>
         <div class="col-md-8">
-            <textarea id="description" ng-model="data.Description" class="col-md-8 form-control" required="required" placeholder="Description"></textarea>
+            <textarea id="description" ng-model="data.Description" class="col-md-8 form-control" required="required" placeholder="{{project.Description}}"></textarea>
         </div>
     </div>
     <div class="form-group">
@@ -27,7 +26,7 @@
         <div class="col-md-8">
             <select id="leader" ng-model="data.LeadId"
                     required="required" class="form-control">
-                <option value="" disabled>Select Assignee</option>
+                <option value="" disabled>-- Select Assignee --</option>
                 <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>
             </select>
         </div>
@@ -35,22 +34,20 @@
     <div class="form-group">
         <label for="labels" class="control-label col-md-2">Labels</label>
         <div class="col-md-8">
-            <tags-input id="labels" ng-model="data.Labels" display-property="Name" placeholder="Labels"
-                        replace-spaces-with-dashes="false" required="required">
-            </tags-input>
+            <input type="text" id="labels" ng-model="data.Labels"  class="form-control" display-property="Name" placeholder="{{Labels}}" />
+            </input>
         </div>
     </div>
     <div class="form-group">
         <label for="priorities" class="control-label col-md-2">Priorities</label>
-        <div class="col-md-9">
-            <input type="text" id="priorities" class="form-control" ng-model="data.Priorities" to-array-object-parser
-                   required="required" placeholder="Priorities">
+        <div class="col-md-8">
+            <input type="text" id="priorities" ng-model="data.Priorities"  class="form-control" />
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button type="button" class="btn btn-success" ng-click="addProject(projectData, projectLabels)" ng-disabled="addProjectForm.$invalid" data-dismiss="modal">Add Project</button>
-            <a href="#/projects" class="btn btn-default">Cancel</a>
+            <button type="button" class="btn btn-success" ng-click="updateProject()" ng-disabled="editProjectForm.$invalid" data-dismiss="modal">Save project</button>
+            <a href="#/projects/{{project.Id}}" class="btn btn-default" data-dismiss="modal">Cancel</a>
         </div>
     </div>
 </form>

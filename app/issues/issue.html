@@ -1,0 +1,15 @@
+<div class="row">
+    <h3 class="col-md-6 col-md-offset-2">Issue</h3>
+    <div class="col-md-6 col-md-offset-2">
+        <p>Title: {{issue.Title}}</p>
+        <p>Description: {{issue.Description}}</p>
+        <p>Due Date: {{issue.DueDate}}</p>
+        <p>Author: {{issue.Author.Username}}</p>
+        <p>Assignee: {{issue.Assignee.Username}}</p>
+        <p>Project: <a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a></p>
+        <p>Labels: <span class="label label-success" ng-repeat="label in issue.Labels">{{label.Name}}</span></p>
+        <p>Priority: <span class="label label-success">{{issue.Priority.Name}}</span></p>
+        <p>Status: <span class="label label-success">{{issue.Status.Name}}</span></p>
+        <p ng-if="isProjectLeader || isAssignee"><a href="#/issues/{{issue.Id}}/edit" class="btn btn-success">Edit Issue</a></p>
+    </div>
+</div>

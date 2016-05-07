@@ -33,18 +33,29 @@
                   templateUrl: 'app/projects/add-project.html',
                   controller: 'ProjectsController',
                   resolve: {
-                      access: ['$location', 'authentication', 'Notification',
-                          function($location, authentication, Notification){
+                      access: ['$location', 'identity', 'Notification',
+                          function($location, identity, Notification){
                               if(!identity.getCurrentUser().isAdmin){
-                                  Notification.error('Unauthorized access');
+                                  Notification.error('Admins only');
+                                  $location.path('/');
+                              }
+                          }]
+                  }
+              })
+              .when('/projects/:id/edit', {
+                  templateUrl: 'app/projects/edit-project.html',
+                  controller: 'ProjectsController',
+                  resolve: {
+                      access: ['$location', 'identity', 'Notification',
+                          function($location, identity, Notification){
+                              if(!identity.getCurrentUser().isAdmin){
+                                  Notification.error('Admins only');
                                   $location.path('/');
                               }
                           }]
                   }
               })
       }])
-
-
       .controller('ProjectsController', [
           '$scope',
           '$location',
@@ -108,6 +119,33 @@
                           Notification.success('Project added');
                           $location.path('/projects/' + data.Id);
                       });
+              };
+
+              $scope.editProject = function(data) {
+                  var Priorities = [],
+                      Labels = [];
+
+                  $scope.updatedValues = {
+                      name: null,
+                      description: null,
+                      selectedUser: null
+                  };
+
+                  $scope.updatedProject = function() {
+                      var project = $scope.project;
+                      var editedProject = {
+                          Name: $scope.updatedValues.name || project.Name,
+                          Description: $scope.updatedValues.description || project.Description,
+                          Labels: $scope.Labels || project.Labels,
+                          Priorities: $scope.Priorities || project.Priorities
+                      };
+
+                      projectsService.editProject()
+                          .then(function(data) {
+                              Notification.success('Project updated');
+                              $location.path('/projects/' + $routeParams.id);
+                          });
+                  }
               }
       }]);
 }());
