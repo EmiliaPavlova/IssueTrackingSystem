@@ -55,7 +55,7 @@
                             $scope.currentPage = 1;
                         });
 
-                    projectsService.getAllUserProjects(JSON.parse(identity.getCurrentUser()).Id)
+                    projectsService.getAllUserProjects(identity.getCurrentUser().Id)
                     //console.log(JSON.parse(identity.getCurrentUser()).Id)
                         .then(function(data) {
                             $scope.projects = data.Projects;

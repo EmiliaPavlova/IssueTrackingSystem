@@ -57,10 +57,40 @@
                     return deferred.promise;
                 }
 
+                function getProjectIssues(projectId) {
+                    var deferred = $q.defer();
+                    var url = BASE_URL + '/projects/' + projectId + '/issues';
+
+                    $http.get(url, authentication.authorizationHeader())
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        }, function(response){
+                            deferred.reject(response);
+                        });
+
+                    return deferred.promise;
+                }
+
+                function addProject(newProject) {
+                    var deferred = $q.defer();
+                    var url = BASE_URL + '/projects';
+
+                    $http.post(url, newProject, authentication.authorizationHeader())
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        }, function(error) {
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
                 return {
                     getAllUserProjects: getAllUserProjects,
                     getAllProjects: getAllProjects,
-                    getProjectById: getProjectById
+                    getProjectById: getProjectById,
+                    getProjectIssues: getProjectIssues,
+                    addProject: addProject
                 }
             }
         ])

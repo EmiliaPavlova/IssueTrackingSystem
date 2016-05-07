@@ -71,8 +71,8 @@
                 }
 
                 function logout() {
-                    //delete sessionStorage['access_token'];
-                    $window.sessionStorage.clear();
+                    delete sessionStorage['access_token'];
+                    //$window.sessionStorage.clear();
                     identity.removeUserProfile();
                 }
 

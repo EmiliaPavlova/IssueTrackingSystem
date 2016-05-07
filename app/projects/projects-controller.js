@@ -29,6 +29,19 @@
                           }]
                   }
               })
+              .when('/projects/add', {
+                  templateUrl: 'app/projects/add-project.html',
+                  controller: 'ProjectsController',
+                  resolve: {
+                      access: ['$location', 'authentication', 'Notification',
+                          function($location, authentication, Notification){
+                              if(!identity.getCurrentUser().isAdmin){
+                                  Notification.error('Unauthorized access');
+                                  $location.path('/');
+                              }
+                          }]
+                  }
+              })
       }])
 
 
@@ -55,8 +68,46 @@
                       });
               };
 
-              $scope.viewProject = function(projectId) {
-                  $location.path('/projects/' + projectId)
+              projectsService.getProjectById($routeParams.id)
+                  .then(function (data) {
+                      $scope.project = data;
+                  });
+
+              projectsService.getProjectIssues($routeParams.id)
+                  .then(function (data) {
+                      $scope.projectIssues = data;
+                  });
+
+              $scope.addProject = function(data) {
+                  var Priorities = [],
+                      Labels = [];
+
+                  data.priorities.split(",").forEach(function(p) {
+                      Priorities.push({
+                          Name: p.trim()
+                      });
+                  });
+
+                  data.labels.split(",").forEach(function(p) {
+                      Labels.push({
+                          Name: p.trim()
+                      });
+                  });
+
+                  var project = {
+                      Name: data.Name,
+                      Description: data.Description,
+                      ProjectKey: data.Name.match(/b(\w)/g).join(''),
+                      labels: Labels,
+                      priorities: Priorities,
+                      LeadId: data.LeadId
+                  };
+
+                  projectsService.addProject(project)
+                      .then(function(data) {
+                          Notification.success('Project added');
+                          $location.path('/projects/' + data.Id);
+                      });
               }
       }]);
 }());
