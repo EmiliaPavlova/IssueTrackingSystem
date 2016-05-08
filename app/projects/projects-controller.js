@@ -73,7 +73,7 @@
                   });
 
               $scope.reloadProjects = function() {
-                  projectsService.getAllProjects(null, $scope.currentPage)
+                  projectsService.getAllProjects()
                       .then(function (data) {
                           $scope.allProjects = data.Projects;
                       });

@@ -63,7 +63,7 @@
                 }
 
                 $scope.reloadIssues = function() {
-                    issuesService.getUserIssues(null, $scope.currentPage)
+                    issuesService.getUserIssues()
                         .then(function(data) {
                             $scope.userIssues = data.Issues;
                         });

@@ -83,13 +83,16 @@
                 $scope.labels = [];
                 $scope.saveIssue = function() {
                     $scope.newIssue.ProjectId = $routeParams.id;
+                    if($scope.labels.length > 0) {
+                        $scope.newIssue.Labels = $scope.labels.map(function(label) {
+                            return {
+                                Name: label.Name
+                            }
+                        })
+                    }
                 };
                 // not finished
 
-                //projectsService.getProjectById($routeParams.id)
-                //    .then(function(project){
-                //        $scope.priorities = project.Priorities;
-                //    });
             }
         ])
 }());
